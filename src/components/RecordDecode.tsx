@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { isAudioRunning, sounds } from "@/lib/audio";
+import { ensureAudio, isAudioRunning, sounds } from "@/lib/audio";
 import { usePreferences } from "@/lib/preferences";
 import ui from "./ui.module.css";
 import s from "./RecordDecode.module.css";
@@ -29,6 +29,8 @@ function scramble(target: string, locked: number): string {
  * "RECORD M-01" label that decodes from noise.
  * - plays silently when it scrolls fully into view and when the tab regains focus
  * - replays on hover, with sound if SOUND is on (the easter egg)
+ * - replays on click too: a click is a user gesture, so it can unlock audio
+ *   that a hover could not (e.g. SOUND left on from an earlier visit)
  * Screen readers always get the plain text.
  */
 export function RecordDecode({ text }: { text: string }) {
@@ -123,6 +125,12 @@ export function RecordDecode({ text }: { text: string }) {
         aria-hidden="true"
         className={s.label}
         onMouseEnter={() => start(true)}
+        onClick={() => {
+          // resume() settles well within HOLD_MS, so the scramble ticks
+          // already find the context running.
+          if (soundRef.current) ensureAudio();
+          start(true);
+        }}
       >
         <span>{view.chars.slice(0, view.locked)}</span>
         <span className={s.noise}>{view.chars.slice(view.locked)}</span>

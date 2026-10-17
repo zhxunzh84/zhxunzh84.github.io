@@ -16,19 +16,23 @@ const listeners = new Set<() => void>();
 const memory: Record<string, string> = {};
 
 function readStored(key: string): string | null {
+  // An in-memory value exists only after a failed write (e.g. quota full or
+  // blocked storage); it wins so the toggle still works for this visit.
+  if (key in memory) return memory[key];
   try {
     return window.localStorage.getItem(key);
   } catch {
-    return memory[key] ?? null;
+    return null;
   }
 }
 
 function writeStored(key: string, value: string) {
-  memory[key] = value;
   try {
     window.localStorage.setItem(key, value);
+    // Persisted: drop any override so cross-tab sync via storage events works.
+    delete memory[key];
   } catch {
-    // Private mode / blocked storage: keep the in-memory value only.
+    memory[key] = value;
   }
 }
 

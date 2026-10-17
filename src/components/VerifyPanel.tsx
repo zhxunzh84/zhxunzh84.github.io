@@ -25,7 +25,7 @@ export function VerifyPanel({
 
   return (
     <>
-      <section className={`${s.verify} anim-rise`} style={{ animationDelay: "750ms" }} aria-labelledby="verify-title">
+      <section className={`${s.verify} anim-rise`} style={{ animationDelay: "200ms" }} aria-labelledby="verify-title">
         <div className={s.text}>
           <p className={`${ui.label} ${s.label}`}>§ VERIFICATION</p>
           <h2 id="verify-title" className={s.title}>

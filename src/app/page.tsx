@@ -93,14 +93,14 @@ export default function Home() {
               {pad2(total)}
             </span>
           </div>
-          <ol className={`${s.progress} anim-draw`} style={{ animationDelay: "150ms" }}>
+          <ol className={`${s.progress} anim-draw`} style={{ animationDelay: "80ms" }}>
             {credentials.map((c, i) => {
               const done = c.status === "issued";
               return (
                 <li key={c.id} className={`${s.step} ${done ? s.stepDone : ""}`}>
                   <div
                     className={`${s.stepBar} ${done ? "anim-fill" : ""}`}
-                    style={done ? { animationDelay: `${650 + i * 120}ms` } : undefined}
+                    style={done ? { animationDelay: `${300 + i * 40}ms` } : undefined}
                   />
                   <span className={s.stepLabel}>
                     {c.code}
@@ -125,9 +125,9 @@ export default function Home() {
               {pad2(total)}
             </span>
           </div>
-          <div className={`${s.stack} anim-draw`} style={{ animationDelay: "250ms" }}>
+          <div className={`${s.stack} anim-draw`} style={{ animationDelay: "150ms" }}>
             {issuedCredentials.map((c, i) => (
-              <IssuedCard key={c.id} credential={c} delay={500 + i * 80} />
+              <IssuedCard key={c.id} credential={c} delay={300 + Math.min(i, 5) * 50} />
             ))}
           </div>
         </section>
@@ -143,14 +143,14 @@ export default function Home() {
                 {pad2(pendingCredentials.length)} REMAINING
               </span>
             </div>
-            <ol className={`${s.rows} anim-draw`} style={{ animationDelay: "400ms" }}>
+            <ol className={`${s.rows} anim-draw`} style={{ animationDelay: "200ms" }}>
               {pendingCredentials.map((c, i) => (
                 <li
                   key={c.id}
                   className={`${s.row} ${
                     c.kind === "award" ? `${s.rowAward} hover-scan` : "hover-hatch"
                   } anim-rise`}
-                  style={{ animationDelay: `${650 + i * 50}ms` }}
+                  style={{ animationDelay: `${350 + i * 40}ms` }}
                 >
                   <span className={s.rowCode}>{c.code}</span>
                   <span className={s.rowTitle}>{c.title}</span>

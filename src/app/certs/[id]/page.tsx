@@ -70,7 +70,7 @@ export default async function CredentialPage(props: PageProps<"/certs/[id]">) {
         {/* title + spec cells */}
         <section
           className={`${ui.hairline} anim-draw`}
-          style={{ animationDelay: "450ms" }}
+          style={{ animationDelay: "100ms" }}
           aria-labelledby="record-title"
         >
           <div className={s.titleCell}>
@@ -105,7 +105,7 @@ export default async function CredentialPage(props: PageProps<"/certs/[id]">) {
         {(c.abstract || c.skills?.length) && (
           <section
             className={`${ui.hairline} anim-draw`}
-            style={{ animationDelay: "850ms" }}
+            style={{ animationDelay: "300ms" }}
             aria-label="About this credential"
           >
             {c.abstract && (
@@ -143,7 +143,7 @@ export default async function CredentialPage(props: PageProps<"/certs/[id]">) {
               {pad2(credentials.length)} ISSUED
             </span>
           </div>
-          <ol className={`${s.sequence} anim-draw`} style={{ animationDelay: "950ms" }}>
+          <ol className={`${s.sequence} anim-draw`} style={{ animationDelay: "350ms" }}>
             {credentials.map((x) => {
               const current = x.id === c.id;
               const issued = x.status === "issued";

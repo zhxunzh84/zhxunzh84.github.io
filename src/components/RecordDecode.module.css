@@ -2,6 +2,9 @@
   cursor: default;
   display: inline-flex;
   align-items: center;
+  /* The label is split across spans; keep the space between RECORD and the
+     code from being stripped at a span edge, or the width jumps. */
+  white-space: pre;
   /* Ligatures would merge glyph pairs and change the label's width. */
   font-variant-ligatures: none;
   font-feature-settings: "liga" 0, "calt" 0;

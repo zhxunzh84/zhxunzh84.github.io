@@ -55,7 +55,9 @@ a:hover {
    the inline script in layout.tsx and updated by the MOTION toggle.
    ========================================================================== */
 
-/* ---- entrance (one-off, < 1s) ----
+/* ---- entrance (one-off) ----
+   Budget: every delay + duration ends within 1s of load (SPEC §6).
+   draw 600ms (delay <= 350), rise 400ms (delay <= 550), fill 450ms (delay <= 500).
    fill-mode "backwards": hidden during the delay, and nothing lingers after
    the animation (a lingering clip-path would cut off card glows). */
 @keyframes draw {
@@ -70,11 +72,11 @@ a:hover {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
 }
-.anim-draw { animation: draw 700ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
-.anim-rise { animation: rise 480ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
+.anim-draw { animation: draw 600ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
+.anim-rise { animation: rise 400ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
 .anim-fill {
   transform-origin: left center;
-  animation: fill 600ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  animation: fill 450ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
 }
 
 /* ---- issued card: rotating, breathing glow border on hover ---- */
@@ -203,3 +205,10 @@ html[data-motion="off"] .march {
   animation: none !important;
 }
 html[data-motion="off"] .crosshair { display: none; }
+/* Transitions too: hover states snap instead of fading or sliding. */
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  transition: none !important;
+}
+html[data-motion="off"] .glow-card:hover .nudge svg { transform: none; }

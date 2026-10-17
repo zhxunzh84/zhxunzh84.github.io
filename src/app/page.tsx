@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   credentials,
   issuedCredentials,
@@ -15,6 +16,10 @@ import { Toggles } from "@/components/Toggles";
 import { certPath, formatPeriod, pad2 } from "@/lib/format";
 import ui from "@/components/ui.module.css";
 import s from "./page.module.css";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   const total = credentials.length;

@@ -18,3 +18,8 @@ export function pad4(n: number): string {
 export function certPath(id: string): string {
   return `/certs/${id}/`;
 }
+
+/** Share-preview image for a page: "index" or a credential id. */
+export function ogImagePath(id: string): string {
+  return `/og/${id}.png`;
+}

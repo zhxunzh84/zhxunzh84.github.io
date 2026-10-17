@@ -13,7 +13,7 @@ import { RecordDecode } from "@/components/RecordDecode";
 import { RetrieveLink } from "@/components/SoundLink";
 import { Toggles } from "@/components/Toggles";
 import { VerifyPanel } from "@/components/VerifyPanel";
-import { certPath, pad2 } from "@/lib/format";
+import { certPath, ogImagePath, pad2 } from "@/lib/format";
 import ui from "@/components/ui.module.css";
 import s from "./page.module.css";
 
@@ -30,12 +30,28 @@ export async function generateMetadata(
   const { id } = await props.params;
   const c = getCredential(id);
   if (!c) return {};
+  const description = `${c.code} of the ${programme.name}, issued by ${programme.issuer}${
+    c.issuedOn ? ` in ${c.issuedOn}` : ""
+  }. Verifiable on OpenCerts.`;
+  const image = {
+    url: ogImagePath(c.id),
+    width: 1200,
+    height: 630,
+    alt: `${c.code} — ${c.title}`,
+  };
   return {
     title: c.title,
-    description: `${c.code} of the ${programme.name}, issued by ${programme.issuer}${
-      c.issuedOn ? ` in ${c.issuedOn}` : ""
-    }. Verifiable on OpenCerts.`,
+    description,
     alternates: { canonical: certPath(c.id) },
+    openGraph: {
+      type: "website",
+      siteName: "Zhang Xun · Credentials",
+      url: certPath(c.id),
+      title: `${c.title} · ${programme.holder}`,
+      description,
+      images: [image],
+    },
+    twitter: { card: "summary_large_image", images: [image] },
   };
 }
 

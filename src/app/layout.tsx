@@ -5,6 +5,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Crosshair } from "@/components/Crosshair";
 import { EntranceGate } from "@/components/EntranceGate";
+import { ogImagePath } from "@/lib/format";
 import { motionBootScript } from "@/lib/motion-boot";
 import "./globals.css";
 
@@ -19,6 +20,15 @@ export const metadata: Metadata = {
   },
   description:
     "Verifiable NTU credentials from the Advanced Professional Certificate in AI Engineering.",
+  // Pages that set their own openGraph replace this whole object, so the
+  // detail page repeats siteName/type alongside its own image.
+  openGraph: {
+    type: "website",
+    siteName: "Zhang Xun · Credentials",
+    url: "/",
+    images: [{ url: ogImagePath("index"), width: 1200, height: 630 }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

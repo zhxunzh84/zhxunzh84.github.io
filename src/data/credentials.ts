@@ -25,11 +25,18 @@ export interface Credential {
   opencertsUrl?: string;
 }
 
+export const profiles = {
+  github: "https://github.com/zhxunzh84",
+  /** Set to the LinkedIn profile URL to show the header link. */
+  linkedin: undefined as string | undefined,
+};
+
 export const programme = {
   name: "Advanced Professional Certificate in AI Engineering",
   issuer: "Nanyang Technological University",
   issuerShort: "NTU",
   holder: "Zhang Xun",
+  holderInitials: "ZX",
   summary:
     "Building AI-enabled applications end to end through NTU’s AI Engineering programme: from LLM and retrieval pipelines to frontends, secure backends and automated deployment.",
   scope: [
@@ -66,6 +73,8 @@ export const credentials: Credential[] = [
     issuedOn: "2026-10",
     period: { start: "2026-09-07", end: "2026-10-01" },
     skills: ["React.js", "JavaScript", "REST APIs", "Next.js"],
+    abstract:
+      "The second module of NTU’s Advanced Professional Certificate in AI Engineering, focused on building responsive, interactive interfaces with modern frameworks. Hands-on work centred on React.js and JavaScript, consuming REST APIs and building with Next.js.",
     opencertsUrl:
       "https://www.opencerts.io/?q=%7B%22type%22%3A%22DOCUMENT%22%2C%22payload%22%3A%7B%22uri%22%3A%22https%3A%2F%2Fgist.githubusercontent.com%2Fzhxunzh84%2F143a622c86b78781522312f1cba68aa4%2Fraw%2Fc53a5eea8a074bb1e39bdf52b621474eecdbd983%2Fcertificate-encrypted.opencert%22%7D%7D#%7B%22key%22%3A%224db40cbbbadefc4772c2d46348893231f1b2f619198b1c98ac008e60c9595f45%22%7D",
   },

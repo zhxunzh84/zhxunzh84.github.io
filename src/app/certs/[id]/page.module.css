@@ -1,0 +1,337 @@
+.main {
+  position: relative;
+  z-index: 1;
+  padding-block: 56px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.recordTag {
+  display: inline-flex;
+  gap: 10px;
+}
+
+/* ---------- title + spec cells ---------- */
+
+.titleCell {
+  flex: 1 1 100%;
+  background: var(--bg);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  margin: 0;
+  max-width: 820px;
+  font-family: var(--font-mono);
+  font-size: clamp(30px, 4.6vw, 48px);
+  line-height: 1.14;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 17px;
+  color: var(--text-3);
+}
+
+.spec {
+  flex: 1 1 200px;
+  background: var(--panel);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--font-mono);
+}
+
+.specTerm {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--text-4);
+}
+
+.specValue {
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+/* ---------- verification ---------- */
+
+.verify {
+  background: #0d1a33;
+  border: 1px solid var(--accent);
+  padding: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px 40px;
+}
+
+.verifyText {
+  flex: 999 1 420px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.verifyLabel {
+  color: var(--accent);
+}
+
+.verifyTitle {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.verifyDesc {
+  margin: 0;
+  max-width: 560px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-3);
+}
+
+.verifyNote {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-4);
+}
+
+.verifyButton {
+  flex: 0 0 auto;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #06101f;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.verifyButton:hover {
+  color: #06101f;
+  background: #6ea2ff;
+}
+
+/* ---------- provenance strip ---------- */
+
+.provenance {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  padding: 0 2px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--text-4);
+}
+
+.provDone {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+}
+
+.provOpen {
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--accent);
+}
+
+.provIssued {
+  color: var(--text-2);
+}
+
+.provLine {
+  flex: 1 1 48px;
+  min-width: 48px;
+  height: 1px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #4a5878 0 6px,
+    transparent 6px 12px
+  );
+}
+
+/* ---------- abstract + skills ---------- */
+
+.abstract {
+  flex: 2 1 420px;
+  min-width: 0;
+  background: var(--bg);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.abstract p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+.skillsCell {
+  flex: 1 1 260px;
+  min-width: 0;
+  background: var(--panel);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skillList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.skillList li {
+  display: flex;
+  gap: 10px;
+}
+
+.dash {
+  color: var(--accent);
+}
+
+/* ---------- sequence ---------- */
+
+.sequence {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+}
+
+.seqItem {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.seqIssued {
+  background: var(--panel);
+}
+
+.seqBar {
+  height: 3px;
+  background: var(--line);
+}
+
+.seqIssued .seqBar {
+  background: var(--accent);
+  opacity: 0.55;
+}
+
+.seqCurrent .seqBar {
+  opacity: 1;
+}
+
+.seqBody {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.seqBody:hover .seqCode {
+  color: var(--accent);
+}
+
+.seqCode {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.seqIssued .seqCode {
+  color: var(--text);
+}
+
+.seqCurrent .seqCode {
+  color: var(--accent);
+}
+
+.seqState {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--text-4);
+}
+
+.seqIssued .seqState {
+  color: var(--text-3);
+}
+
+/* ---------- phone: keep VERIFY on the first screen ---------- */
+
+@media (max-width: 600px) {
+  .main {
+    padding-block: 32px 40px;
+    gap: 24px;
+  }
+
+  .titleCell,
+  .verify,
+  .abstract,
+  .skillsCell {
+    padding: 24px 20px;
+  }
+
+  .spec {
+    flex: 1 1 40%;
+    padding: 14px 16px;
+    gap: 6px;
+  }
+
+  .specValue {
+    font-size: 13px;
+  }
+
+  .subtitle,
+  .verifyDesc {
+    display: none;
+  }
+
+  .verifyButton {
+    flex: 1 1 100%;
+  }
+}

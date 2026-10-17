@@ -1,0 +1,100 @@
+/* Shared building blocks used by both pages. */
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 4vw, 48px);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* Small uppercase technical label, e.g. "§ 01 — ISSUED" */
+.label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: var(--text-4);
+}
+
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 16px;
+}
+
+/* A grid of cells joined by 1px hairlines: the container background shows
+   through the 1px gaps between opaque children. */
+.hairline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--text-4);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+.chipOn {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Mono text link with a trailing icon, 44px touch target */
+.textLink {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.textLink:hover {
+  color: #b3ceff;
+}
+
+/* "+ Skill" list that wraps whole words */
+.skills {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+
+.skills li {
+  white-space: nowrap;
+}
+
+.plus {
+  color: var(--accent);
+}
+
+/* Visually hidden but available to screen readers */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

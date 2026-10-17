@@ -114,20 +114,28 @@ a:hover {
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask-composite: exclude;
 }
-.glow-card:hover .glow,
+/* Keyboard focus works everywhere... */
 .glow-card:focus-within .glow { opacity: 1; animation: glow-breathe 3s ease-in-out infinite; }
-.glow-card:hover .glow-ring,
 .glow-card:focus-within .glow-ring { animation: glow-spin 8s linear infinite; }
 
 /* Arrow nudge on the card's OPEN RECORD link */
 .nudge svg { transition: transform 0.25s ease; }
-.glow-card:hover .nudge svg { transform: translateX(4px); }
+
+/* ...hover effects only on devices with a real hover. Touch browsers keep an
+   emulated :hover after a tap, which would leave these running. */
+@media (hover: hover) {
+  .glow-card:hover .glow { opacity: 1; animation: glow-breathe 3s ease-in-out infinite; }
+  .glow-card:hover .glow-ring { animation: glow-spin 8s linear infinite; }
+  .glow-card:hover .nudge svg { transform: translateX(4px); }
+}
 
 /* ---- pending rows: drifting hatch; AWARD: scan band ---- */
 .hover-hatch,
 .hover-scan { transition: box-shadow 0.25s ease; }
-.hover-hatch:hover,
-.hover-scan:hover { box-shadow: inset 0 0 0 1px var(--accent); }
+@media (hover: hover) {
+  .hover-hatch:hover,
+  .hover-scan:hover { box-shadow: inset 0 0 0 1px var(--accent); }
+}
 .hover-hatch > *,
 .hover-scan > * { position: relative; z-index: 1; }
 
@@ -143,7 +151,9 @@ a:hover {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-.hover-hatch:hover::before { opacity: 1; animation: hatch-drift 1.6s linear infinite; }
+@media (hover: hover) {
+  .hover-hatch:hover::before { opacity: 1; animation: hatch-drift 1.6s linear infinite; }
+}
 
 @keyframes scan-sweep { from { left: -160px; } to { left: 100%; } }
 .hover-scan { overflow: hidden; }
@@ -158,7 +168,9 @@ a:hover {
   background: linear-gradient(90deg, transparent, rgba(76, 141, 255, 0.1) 85%, rgba(122, 171, 255, 0.55));
   opacity: 0;
 }
-.hover-scan:hover::after { opacity: 1; animation: scan-sweep 2.6s linear infinite; }
+@media (hover: hover) {
+  .hover-scan:hover::after { opacity: 1; animation: scan-sweep 2.6s linear infinite; }
+}
 
 /* ---- provenance dashed line flow (the only always-on animation) ---- */
 @keyframes march { to { background-position: 24px 0; } }

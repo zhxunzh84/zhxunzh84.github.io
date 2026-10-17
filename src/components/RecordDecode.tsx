@@ -85,7 +85,11 @@ export function RecordDecode({ text }: { text: string }) {
     let wasVisible = false;
     const io = new IntersectionObserver(
       (entries) => {
-        const visible = entries[entries.length - 1].isIntersecting;
+        // threshold: 1 only controls *when* the callback fires; an entry can
+        // still report isIntersecting for a partly visible label, so check
+        // the ratio too (with a little slack for sub-pixel rounding).
+        const entry = entries[entries.length - 1];
+        const visible = entry.isIntersecting && entry.intersectionRatio >= 0.99;
         if (visible && !wasVisible) start(false);
         wasVisible = visible;
       },

@@ -59,7 +59,8 @@ function emit() {
 function subscribe(listener: () => void) {
   listeners.add(listener);
   const onStorage = (e: StorageEvent) => {
-    if (e.key === SOUND_KEY || e.key === MOTION_KEY) emit();
+    // key is null when another tab calls localStorage.clear().
+    if (e.key === null || e.key === SOUND_KEY || e.key === MOTION_KEY) emit();
   };
   const mq = window.matchMedia?.("(prefers-reduced-motion: reduce)");
   window.addEventListener("storage", onStorage);

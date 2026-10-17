@@ -30,7 +30,13 @@ export function Crosshair() {
         });
       }
     };
-    const onLeave = () => setPos(null);
+    const onLeave = () => {
+      // Drop a frame queued by the last move, or it would re-show the
+      // crosshair after we hide it.
+      cancelAnimationFrame(raf);
+      raf = 0;
+      setPos(null);
+    };
 
     window.addEventListener("pointermove", onMove, { passive: true });
     document.documentElement.addEventListener("pointerleave", onLeave);

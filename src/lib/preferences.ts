@@ -51,8 +51,12 @@ function readMotion(): boolean {
   return !osPrefersReducedMotion();
 }
 
-function emit() {
+function syncMotionAttr() {
   document.documentElement.dataset.motion = readMotion() ? "on" : "off";
+}
+
+function emit() {
+  syncMotionAttr();
   listeners.forEach((l) => l());
 }
 
@@ -65,6 +69,10 @@ function subscribe(listener: () => void) {
   const mq = window.matchMedia?.("(prefers-reduced-motion: reduce)");
   window.addEventListener("storage", onStorage);
   mq?.addEventListener("change", emit);
+  // The head script set data-motion before hydration; an OS or other-tab
+  // change in between fired no event we could hear. Reconcile now that the
+  // listeners are attached (React re-reads the snapshot itself).
+  syncMotionAttr();
   return () => {
     listeners.delete(listener);
     window.removeEventListener("storage", onStorage);

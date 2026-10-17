@@ -25,11 +25,18 @@ export interface Credential {
   opencertsUrl?: string;
 }
 
+export const profiles = {
+  github: "https://github.com/zhxunzh84",
+  /** Set to the LinkedIn profile URL to show the header link. */
+  linkedin: undefined as string | undefined,
+};
+
 export const programme = {
   name: "Advanced Professional Certificate in AI Engineering",
   issuer: "Nanyang Technological University",
   issuerShort: "NTU",
   holder: "Zhang Xun",
+  holderInitials: "ZX",
   summary:
     "Building AI-enabled applications end to end through NTU’s AI Engineering programme: from LLM and retrieval pipelines to frontends, secure backends and automated deployment.",
   scope: [

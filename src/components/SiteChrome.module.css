@@ -17,6 +17,13 @@
   letter-spacing: 0.06em;
 }
 
+.headerStart {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 18px;
+}
+
 .navLink {
   min-height: 44px;
   display: inline-flex;

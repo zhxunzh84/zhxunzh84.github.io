@@ -3,15 +3,21 @@ import s from "./SiteChrome.module.css";
 
 export function SiteHeader({
   start,
+  controls,
   end,
 }: {
   start: React.ReactNode;
+  /** Shown right after `start` (SOUND / MOTION toggles). */
+  controls?: React.ReactNode;
   end?: React.ReactNode;
 }) {
   return (
     <header className={s.header}>
       <div className={`${ui.wrap} ${s.headerInner}`}>
-        {start}
+        <div className={s.headerStart}>
+          {start}
+          {controls}
+        </div>
         {end}
       </div>
     </header>

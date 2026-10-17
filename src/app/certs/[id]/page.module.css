@@ -66,118 +66,6 @@
   line-height: 1.45;
 }
 
-/* ---------- verification ---------- */
-
-.verify {
-  background: #0d1a33;
-  border: 1px solid var(--accent);
-  padding: 32px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px 40px;
-}
-
-.verifyText {
-  flex: 999 1 420px;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.verifyLabel {
-  color: var(--accent);
-}
-
-.verifyTitle {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.verifyDesc {
-  margin: 0;
-  max-width: 560px;
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--text-3);
-}
-
-.verifyNote {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--text-4);
-}
-
-.verifyButton {
-  flex: 0 0 auto;
-  min-height: 52px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 14px 24px;
-  border-radius: 4px;
-  background: var(--accent);
-  color: #06101f;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-}
-
-.verifyButton:hover {
-  color: #06101f;
-  background: #6ea2ff;
-}
-
-/* ---------- provenance strip ---------- */
-
-.provenance {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 14px;
-  padding: 0 2px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  color: var(--text-4);
-}
-
-.provDone {
-  width: 6px;
-  height: 6px;
-  background: var(--accent);
-}
-
-.provOpen {
-  width: 6px;
-  height: 6px;
-  border: 1px solid var(--accent);
-}
-
-.provIssued {
-  color: var(--text-2);
-}
-
-.provLine {
-  flex: 1 1 48px;
-  min-width: 48px;
-  height: 1px;
-  background-image: repeating-linear-gradient(
-    90deg,
-    #4a5878 0 6px,
-    transparent 6px 12px
-  );
-}
-
 /* ---------- abstract + skills ---------- */
 
 .abstract {
@@ -310,7 +198,6 @@ a.seqBody:hover .seqCode {
   }
 
   .titleCell,
-  .verify,
   .abstract,
   .skillsCell {
     padding: 24px 20px;
@@ -326,12 +213,7 @@ a.seqBody:hover .seqCode {
     font-size: 13px;
   }
 
-  .subtitle,
-  .verifyDesc {
+  .subtitle {
     display: none;
-  }
-
-  .verifyButton {
-    flex: 1 1 100%;
   }
 }

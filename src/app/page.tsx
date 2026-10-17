@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   credentials,
   issuedCredentials,
@@ -11,6 +10,8 @@ import {
 import { Brand, SiteFooter, SiteHeader, chrome } from "@/components/SiteChrome";
 import { Skills } from "@/components/Skills";
 import { ArrowRight } from "@/components/icons";
+import { RetrieveLink } from "@/components/SoundLink";
+import { Toggles } from "@/components/Toggles";
 import { certPath, formatPeriod, pad2 } from "@/lib/format";
 import ui from "@/components/ui.module.css";
 import s from "./page.module.css";
@@ -29,6 +30,7 @@ export default function Home() {
             </Brand>
           </a>
         }
+        controls={<Toggles />}
         end={
           <nav aria-label="Profiles" className={chrome.nav}>
             {profiles.linkedin && (
@@ -45,7 +47,10 @@ export default function Home() {
 
       <main id="top" className={`${ui.wrap} ${s.main}`}>
         {/* § 00 — intro and programme facts */}
-        <section className={ui.hairline} aria-labelledby="index-title">
+        <section
+          className={`${ui.hairline} anim-draw`}
+          aria-labelledby="index-title"
+        >
           <div className={s.intro}>
             <p className={ui.label}>§ 00 — INDEX</p>
             <h1 id="index-title" className={s.title}>
@@ -88,12 +93,15 @@ export default function Home() {
               {pad2(total)}
             </span>
           </div>
-          <ol className={s.progress}>
-            {credentials.map((c) => {
+          <ol className={`${s.progress} anim-draw`} style={{ animationDelay: "80ms" }}>
+            {credentials.map((c, i) => {
               const done = c.status === "issued";
               return (
                 <li key={c.id} className={`${s.step} ${done ? s.stepDone : ""}`}>
-                  <div className={s.stepBar} />
+                  <div
+                    className={`${s.stepBar} ${done ? "anim-fill" : ""}`}
+                    style={done ? { animationDelay: `${300 + i * 40}ms` } : undefined}
+                  />
                   <span className={s.stepLabel}>
                     {c.code}
                     <span className={ui.srOnly}>
@@ -117,9 +125,9 @@ export default function Home() {
               {pad2(total)}
             </span>
           </div>
-          <div className={s.stack}>
-            {issuedCredentials.map((c) => (
-              <IssuedCard key={c.id} credential={c} />
+          <div className={`${s.stack} anim-draw`} style={{ animationDelay: "150ms" }}>
+            {issuedCredentials.map((c, i) => (
+              <IssuedCard key={c.id} credential={c} delay={300 + Math.min(i, 5) * 50} />
             ))}
           </div>
         </section>
@@ -135,11 +143,14 @@ export default function Home() {
                 {pad2(pendingCredentials.length)} REMAINING
               </span>
             </div>
-            <ol className={s.rows}>
-              {pendingCredentials.map((c) => (
+            <ol className={`${s.rows} anim-draw`} style={{ animationDelay: "200ms" }}>
+              {pendingCredentials.map((c, i) => (
                 <li
                   key={c.id}
-                  className={`${s.row} ${c.kind === "award" ? s.rowAward : ""}`}
+                  className={`${s.row} ${
+                    c.kind === "award" ? `${s.rowAward} hover-scan` : "hover-hatch"
+                  } anim-rise`}
+                  style={{ animationDelay: `${350 + i * 40}ms` }}
                 >
                   <span className={s.rowCode}>{c.code}</span>
                   <span className={s.rowTitle}>{c.title}</span>
@@ -165,10 +176,23 @@ function Fact({ term, children }: { term: string; children: React.ReactNode }) {
   );
 }
 
-function IssuedCard({ credential: c }: { credential: Credential }) {
+function IssuedCard({
+  credential: c,
+  delay,
+}: {
+  credential: Credential;
+  delay: number;
+}) {
   const period = formatPeriod(c.period);
   return (
-    <article className={s.card} aria-labelledby={`card-${c.id}`}>
+    <article
+      className={`${s.card} glow-card anim-rise`}
+      style={{ animationDelay: `${delay}ms` }}
+      aria-labelledby={`card-${c.id}`}
+    >
+      <div className="glow" aria-hidden="true">
+        <div className="glow-ring" />
+      </div>
       <div className={s.cardBody}>
         <div className={s.cardTop}>
           <span>{c.code}</span>
@@ -189,11 +213,14 @@ function IssuedCard({ credential: c }: { credential: Credential }) {
         </dl>
       </div>
       <div className={s.cardAction}>
-        <Link href={certPath(c.id)} className={`${ui.textLink} ${s.actionLink}`}>
+        <RetrieveLink
+          href={certPath(c.id)}
+          className={`${ui.textLink} ${s.actionLink} nudge`}
+        >
           OPEN RECORD
           <span className={ui.srOnly}> for {c.title}</span>
           <ArrowRight />
-        </Link>
+        </RetrieveLink>
         <span className={s.hint}>VERIFIABLE ON OPENCERTS</span>
       </div>
     </article>

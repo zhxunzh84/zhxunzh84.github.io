@@ -8,7 +8,11 @@ import {
   programme,
 } from "@/data/credentials";
 import { Brand, SiteFooter, SiteHeader, chrome } from "@/components/SiteChrome";
-import { ArrowLeft, ArrowUpRight } from "@/components/icons";
+import { ArrowLeft } from "@/components/icons";
+import { RecordDecode } from "@/components/RecordDecode";
+import { RetrieveLink } from "@/components/SoundLink";
+import { Toggles } from "@/components/Toggles";
+import { VerifyPanel } from "@/components/VerifyPanel";
 import { certPath, pad2 } from "@/lib/format";
 import ui from "@/components/ui.module.css";
 import s from "./page.module.css";
@@ -52,10 +56,11 @@ export default async function CredentialPage(props: PageProps<"/certs/[id]">) {
             INDEX
           </Link>
         }
+        controls={<Toggles />}
         end={
           <span className={s.recordTag}>
             <Brand initials={programme.holderInitials}>
-              <span>RECORD {c.code}</span>
+              <RecordDecode text={`RECORD ${c.code}`} />
             </Brand>
           </span>
         }
@@ -63,7 +68,11 @@ export default async function CredentialPage(props: PageProps<"/certs/[id]">) {
 
       <main className={`${ui.wrap} ${s.main}`}>
         {/* title + spec cells */}
-        <section className={ui.hairline} aria-labelledby="record-title">
+        <section
+          className={`${ui.hairline} anim-draw`}
+          style={{ animationDelay: "450ms" }}
+          aria-labelledby="record-title"
+        >
           <div className={s.titleCell}>
             <p className={ui.label}>
               § {c.code} — {programme.name.toUpperCase()}
@@ -83,51 +92,22 @@ export default async function CredentialPage(props: PageProps<"/certs/[id]">) {
           <SpecCell term="FORMAT">OpenCerts</SpecCell>
         </section>
 
-        {/* verification */}
+        {/* verification + provenance */}
         {c.opencertsUrl && (
-          <section className={s.verify} aria-labelledby="verify-title">
-            <div className={s.verifyText}>
-              <p className={`${ui.label} ${s.verifyLabel}`}>§ VERIFICATION</p>
-              <h2 id="verify-title" className={s.verifyTitle}>
-                Verify this certificate
-              </h2>
-              <p className={s.verifyDesc}>
-                Open the original digital certificate on OpenCerts to check who
-                issued it and that it has not been altered.
-              </p>
-              <p className={s.verifyNote}>
-                OPENS OPENCERTS.IO · THIS PAGE DOES NOT CERTIFY THE RESULT
-              </p>
-            </div>
-            <a
-              href={c.opencertsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={s.verifyButton}
-            >
-              VERIFY ON OPENCERTS
-              <span className={ui.srOnly}> (opens in a new tab)</span>
-              <ArrowUpRight size={16} strokeWidth={2.2} />
-            </a>
-          </section>
+          <VerifyPanel
+            url={c.opencertsUrl}
+            issuerShort={programme.issuerShort}
+            issuedOn={c.issuedOn}
+          />
         )}
-
-        {/* provenance strip */}
-        <div className={s.provenance}>
-          <span>§ PROVENANCE</span>
-          <span className={s.provDone} aria-hidden="true" />
-          <span className={s.provIssued}>
-            ISSUED · {programme.issuerShort}
-            {c.issuedOn ? ` · ${c.issuedOn}` : ""}
-          </span>
-          <span className={s.provLine} aria-hidden="true" />
-          <span className={s.provOpen} aria-hidden="true" />
-          <span>VERIFY · OPENCERTS.IO</span>
-        </div>
 
         {/* abstract + skills */}
         {(c.abstract || c.skills?.length) && (
-          <section className={ui.hairline} aria-label="About this credential">
+          <section
+            className={`${ui.hairline} anim-draw`}
+            style={{ animationDelay: "850ms" }}
+            aria-label="About this credential"
+          >
             {c.abstract && (
               <div className={s.abstract}>
                 <h2 className={ui.label}>§ ABSTRACT</h2>
@@ -163,7 +143,7 @@ export default async function CredentialPage(props: PageProps<"/certs/[id]">) {
               {pad2(credentials.length)} ISSUED
             </span>
           </div>
-          <ol className={s.sequence}>
+          <ol className={`${s.sequence} anim-draw`} style={{ animationDelay: "950ms" }}>
             {credentials.map((x) => {
               const current = x.id === c.id;
               const issued = x.status === "issued";
@@ -183,9 +163,9 @@ export default async function CredentialPage(props: PageProps<"/certs/[id]">) {
                 >
                   <div className={s.seqBar} />
                   {issued && !current ? (
-                    <Link href={certPath(x.id)} className={s.seqBody}>
+                    <RetrieveLink href={certPath(x.id)} className={s.seqBody}>
                       {body}
-                    </Link>
+                    </RetrieveLink>
                   ) : (
                     <div
                       className={s.seqBody}

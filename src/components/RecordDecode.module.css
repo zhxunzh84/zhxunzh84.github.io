@@ -1,0 +1,37 @@
+.label {
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  /* Ligatures would merge glyph pairs and change the label's width. */
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
+.noise {
+  color: var(--accent);
+}
+
+/* Always occupies 1ch so showing/hiding it never shifts the label. */
+.cursor {
+  display: inline-block;
+  width: 1ch;
+  margin-left: 2px;
+  overflow: hidden;
+  color: var(--accent);
+  visibility: hidden;
+}
+
+.cursorOn {
+  visibility: visible;
+  animation: blink 0.8s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+:global(html[data-motion="off"]) .cursorOn {
+  animation: none;
+}

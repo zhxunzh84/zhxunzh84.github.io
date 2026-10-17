@@ -31,9 +31,23 @@ server, only static files. Use `npm run preview` after a build instead.
 
 ## Adding a certificate
 
-Edit `src/data/credentials.ts`: set the credential's `status` to `"issued"` and
-fill in `issuedOn`, `period`, `skills` and `opencertsUrl`. Open a pull request;
-merging to `main` deploys automatically.
+1. Download the `.opencert` file and run
+
+   ```sh
+   npm run publish-cert -- ~/Downloads/<file>.opencert m03
+   ```
+
+   This removes the NRIC, email and ID type (OpenAttestation obfuscation keeps
+   the signature valid), checks the result, and writes
+   `public/opencerts/m03.opencert`. **Never commit the original file.**
+2. Drag the new file onto <https://www.opencerts.io> to confirm it verifies.
+3. In `src/data/credentials.ts`, set the credential's `status` to `"issued"`
+   and fill in `issuedOn`, `period`, `skills` and
+   `document: "/opencerts/m03.opencert"`.
+4. Open a pull request; merging to `main` deploys automatically.
+
+CI runs `npm run check:certs`, which fails if any hosted certificate no longer
+verifies or still contains an NRIC or email address.
 
 ## Docs
 

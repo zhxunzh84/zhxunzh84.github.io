@@ -21,8 +21,11 @@ export interface Credential {
   period?: { start: string; end: string };
   skills?: string[];
   abstract?: string;
-  /** Full OpenCerts verification link, including the #key fragment. */
-  opencertsUrl?: string;
+  /**
+   * Public, privacy-filtered certificate under /public (see
+   * `npm run publish-cert`). Verified on OpenCerts via opencertsVerifyUrl().
+   */
+  document?: string;
 }
 
 export const profiles = {
@@ -57,12 +60,11 @@ export const credentials: Credential[] = [
     title: "AI and Software Engineering Fundamentals",
     status: "issued",
     issuedOn: "2026-09",
-    period: { start: "2026-09-01", end: "2026-09-06" },
+    period: { start: "2026-09-01", end: "2026-09-04" },
+    document: "/opencerts/m01.opencert",
     skills: ["LangGraph", "LLM", "Prompt Engineering"],
     abstract:
       "The opening module of NTU’s Advanced Professional Certificate in AI Engineering, laying the groundwork for the five-module programme by pairing core software engineering practice with applied AI. Hands-on work centred on large language models, prompt engineering and building LLM workflows with LangGraph.",
-    opencertsUrl:
-      "https://www.opencerts.io/?q=%7B%22type%22%3A%22DOCUMENT%22%2C%22payload%22%3A%7B%22uri%22%3A%22https%3A%2F%2Fgist.githubusercontent.com%2Fzhxunzh84%2F16ca1e665e7bd82a2ffe9b3ec592c3dd%2Fraw%2F89b1f4856d95b39f8a06f3cf12c8f0c3ab6474c6%2Fcertificate-encrypted.opencert%22%7D%7D#%7B%22key%22%3A%2201c3c4488d3d7309a9244e801966fcf71fe70f203a9a0d4f255ecdba8c19458d%22%7D",
   },
   {
     id: "m02",
@@ -72,11 +74,10 @@ export const credentials: Credential[] = [
     status: "issued",
     issuedOn: "2026-10",
     period: { start: "2026-09-07", end: "2026-10-01" },
+    document: "/opencerts/m02.opencert",
     skills: ["React.js", "JavaScript", "REST APIs", "Next.js"],
     abstract:
       "The second module of NTU’s Advanced Professional Certificate in AI Engineering, focused on building responsive, interactive interfaces with modern frameworks. Hands-on work centred on React.js and JavaScript, consuming REST APIs and building with Next.js.",
-    opencertsUrl:
-      "https://www.opencerts.io/?q=%7B%22type%22%3A%22DOCUMENT%22%2C%22payload%22%3A%7B%22uri%22%3A%22https%3A%2F%2Fgist.githubusercontent.com%2Fzhxunzh84%2F143a622c86b78781522312f1cba68aa4%2Fraw%2Fc53a5eea8a074bb1e39bdf52b621474eecdbd983%2Fcertificate-encrypted.opencert%22%7D%7D#%7B%22key%22%3A%224db40cbbbadefc4772c2d46348893231f1b2f619198b1c98ac008e60c9595f45%22%7D",
   },
   {
     id: "m03",

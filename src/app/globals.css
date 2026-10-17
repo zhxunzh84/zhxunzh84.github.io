@@ -49,6 +49,32 @@ a:hover {
   outline-offset: 2px;
 }
 
+/* <main tabIndex=-1> only receives focus from the skip link; the outline
+   would just frame the whole page. */
+main:focus {
+  outline: none;
+}
+
+/* Skip link: off-screen until it receives keyboard focus. */
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 10px 14px;
+  background: var(--bg);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: translateY(-200%);
+}
+.skip-link:focus {
+  transform: none;
+}
+
 /* ==========================================================================
    Motion — see docs/SPEC.md §6.
    Every animation is gated by <html data-motion>, set before first paint by

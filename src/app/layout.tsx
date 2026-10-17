@@ -45,6 +45,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: motionBootScript }} />
       </head>
       <body>
+        {/* First tab stop: jump past the header controls to the content. */}
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <AudioUnlock />
         <Crosshair />
         <EntranceGate />

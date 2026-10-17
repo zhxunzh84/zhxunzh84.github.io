@@ -82,7 +82,7 @@ export default async function CredentialPage(props: PageProps<"/certs/[id]">) {
         }
       />
 
-      <main className={`${ui.wrap} ${s.main}`}>
+      <main id="main" tabIndex={-1} className={`${ui.wrap} ${s.main}`}>
         {/* title + spec cells */}
         <section
           className={`${ui.hairline} anim-draw`}

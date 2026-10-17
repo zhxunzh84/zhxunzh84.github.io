@@ -36,7 +36,7 @@ function scramble(target: string, locked: number): string {
 export function RecordDecode({ text }: { text: string }) {
   const { sound, motion } = usePreferences();
   const [view, setView] = useState({ chars: text, locked: text.length });
-  const elRef = useRef<HTMLSpanElement>(null);
+  const elRef = useRef<HTMLButtonElement>(null);
   const timer = useRef<number | undefined>(undefined);
 
   // Latest preferences for callbacks that outlive a render.
@@ -119,28 +119,28 @@ export function RecordDecode({ text }: { text: string }) {
   const decoding = view.locked < text.length;
 
   return (
-    <>
-      <span
-        ref={elRef}
-        aria-hidden="true"
-        className={s.label}
-        onMouseEnter={() => start(true)}
-        onClick={() => {
-          // resume() settles well within HOLD_MS, so the scramble ticks
-          // already find the context running.
-          if (soundRef.current) ensureAudio();
-          start(true);
-        }}
-      >
+    // A real button so the replay works from the keyboard and is announced.
+    // Its name is the plain label; only the animated characters are hidden.
+    <button
+      ref={elRef}
+      type="button"
+      className={s.label}
+      title="Replay decode"
+      onMouseEnter={() => start(true)}
+      onClick={() => {
+        // A click or Enter/Space is a user gesture, so it may unlock audio.
+        // resume() settles well within HOLD_MS, so the scramble ticks already
+        // find the context running.
+        if (soundRef.current) ensureAudio();
+        start(true);
+      }}
+    >
+      <span aria-hidden="true" className={s.chars}>
         <span>{view.chars.slice(0, view.locked)}</span>
         <span className={s.noise}>{view.chars.slice(view.locked)}</span>
-        <span
-          className={`${s.cursor} ${decoding ? s.cursorOn : ""}`}
-        >
-          ▌
-        </span>
+        <span className={`${s.cursor} ${decoding ? s.cursorOn : ""}`}>▌</span>
       </span>
-      <span className={ui.srOnly}>{text}</span>
-    </>
+      <span className={ui.srOnly}>{text}, replay decode</span>
+    </button>
   );
 }

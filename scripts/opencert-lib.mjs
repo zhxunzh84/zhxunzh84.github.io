@@ -18,10 +18,14 @@ export const PRIVATE_FIELDS = [
 ];
 
 // Singapore NRIC/FIN shape, and anything that looks like an email address.
-// No word boundaries: an identifier glued to other text ("ID:S1234567D")
-// must still be caught. False positives only block a publish, which is the
-// safe direction.
-const NRIC = /[STFGM]\d{7}[A-Z]/;
+// - Both letter cases ("s1234567d", "S1234567d"), spelled out in the classes
+//   rather than via the `i` flag so mask() can rebuild the regex with `g`.
+// - Must not touch another letter or digit: otherwise lowercase hex IDs in the
+//   document ("…fc8f7323735b2e…") look like NRICs. Punctuation and whitespace
+//   are fine neighbours, so "ID:S1234567D" and "ID\tS1234567D" are caught —
+//   the audit scans decoded strings, where a tab is a real tab, not "\t".
+// A false positive only blocks a publish, which is the safe direction.
+const NRIC = /(?<![A-Za-z0-9])[STFGMstfgm]\d{7}[A-Za-z](?![A-Za-z0-9])/;
 const EMAIL = /[\w.+-]+@[\w-]+\.[\w.]+/;
 
 /** Every string value and object key in a decoded document, recursively. */

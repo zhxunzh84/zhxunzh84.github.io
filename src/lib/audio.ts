@@ -23,6 +23,14 @@ export function ensureAudio(): AudioContext | null {
   return ctx;
 }
 
+/**
+ * True only if audio was already unlocked by an earlier click. Never creates
+ * or resumes a context, so it is safe to call from hover handlers.
+ */
+export function isAudioRunning(): boolean {
+  return ctx?.state === "running";
+}
+
 /** One short enveloped tone. `delay` is in seconds from now. */
 function tone(
   freq: number,

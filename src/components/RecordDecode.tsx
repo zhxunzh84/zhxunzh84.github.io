@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ensureAudio, sounds } from "@/lib/audio";
+import { isAudioRunning, sounds } from "@/lib/audio";
 import { usePreferences } from "@/lib/preferences";
 import ui from "./ui.module.css";
 import s from "./RecordDecode.module.css";
@@ -61,7 +61,9 @@ export function RecordDecode({ text }: { text: string }) {
         const t = Math.max(0, Math.min(1, (now - begin) / RESOLVE_MS));
         const locked = t >= 1 ? text.length : Math.floor(t * text.length);
 
-        if (audible && soundRef.current && ensureAudio()) {
+        // Hover is not a user gesture: never create or resume audio here.
+        // Decode sounds play only if a click already unlocked audio.
+        if (audible && soundRef.current && isAudioRunning()) {
           if (locked > lastLocked) sounds.lockChar();
           else if (t === 0 && now - lastStatic > 130) {
             sounds.scramble();

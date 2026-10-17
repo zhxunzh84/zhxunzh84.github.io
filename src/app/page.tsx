@@ -29,7 +29,7 @@ export default function Home() {
     <>
       <SiteHeader
         start={
-          <a href="#top" className={chrome.brand}>
+          <a href="#main" className={chrome.brand}>
             <Brand initials={programme.holderInitials}>
               <span>{programme.holder.toUpperCase()}</span>
             </Brand>
@@ -50,7 +50,7 @@ export default function Home() {
         }
       />
 
-      <main id="top" className={`${ui.wrap} ${s.main}`}>
+      <main id="main" tabIndex={-1} className={`${ui.wrap} ${s.main}`}>
         {/* § 00 — intro and programme facts */}
         <section
           className={`${ui.hairline} anim-draw`}

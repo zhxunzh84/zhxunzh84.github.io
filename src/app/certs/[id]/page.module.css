@@ -15,6 +15,8 @@
 
 .recordTag {
   display: inline-flex;
+  /* The RECORD button has a 44px hit area; keep "ZX /" on its text line. */
+  align-items: center;
   gap: 10px;
 }
 

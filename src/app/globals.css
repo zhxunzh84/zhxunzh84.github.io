@@ -205,6 +205,14 @@ a:hover {
   pointer-events: none;
 }
 
+/* ---- entrances already played (or skipped) on this page ----
+   Set by EntranceGate; keeps them from replaying when MOTION is toggled. */
+html[data-entered] .anim-draw,
+html[data-entered] .anim-rise,
+html[data-entered] .anim-fill {
+  animation: none !important;
+}
+
 /* ---- MOTION off: everything renders in its final, still state ---- */
 html[data-motion="off"] .anim-draw,
 html[data-motion="off"] .anim-rise,

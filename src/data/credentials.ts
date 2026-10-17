@@ -27,8 +27,8 @@ export interface Credential {
 
 export const profiles = {
   github: "https://github.com/zhxunzh84",
-  /** Set to the LinkedIn profile URL to show the header link. */
-  linkedin: undefined as string | undefined,
+  /** Optional: remove to hide the header link. */
+  linkedin: "https://www.linkedin.com/in/jzhangxun/" as string | undefined,
 };
 
 export const programme = {

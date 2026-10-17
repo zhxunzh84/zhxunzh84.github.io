@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
     "lint": "eslint",
-    "typecheck": "next typegen && tsc --noEmit"
+    "typecheck": "next typegen && tsc --noEmit",
+    "preview": "serve out"
   },
   "dependencies": {
     "geist": "^1.8.1",
@@ -21,6 +21,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
+    "serve": "^14.2.6",
     "typescript": "^5"
   }
 }

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 // no request to Google Fonts at build or run time.
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { AudioUnlock } from "@/components/AudioUnlock";
 import { Crosshair } from "@/components/Crosshair";
 import { EntranceGate } from "@/components/EntranceGate";
 import { SITE_URL, ogImagePath } from "@/lib/format";
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: motionBootScript }} />
       </head>
       <body>
+        <AudioUnlock />
         <Crosshair />
         <EntranceGate />
         {children}

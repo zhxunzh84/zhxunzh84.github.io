@@ -1,5 +1,15 @@
+/* Button reset: looks exactly like the plain label it replaced. */
 .label {
-  cursor: default;
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   /* The label is split across spans; keep the space between RECORD and the
@@ -8,6 +18,12 @@
   /* Ligatures would merge glyph pairs and change the label's width. */
   font-variant-ligatures: none;
   font-feature-settings: "liga" 0, "calt" 0;
+}
+
+.chars {
+  display: inline-flex;
+  align-items: center;
+  white-space: pre;
 }
 
 .noise {

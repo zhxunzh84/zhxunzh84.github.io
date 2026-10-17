@@ -18,8 +18,25 @@ export const PRIVATE_FIELDS = [
 ];
 
 // Singapore NRIC/FIN shape, and anything that looks like an email address.
-const NRIC = /\b[STFGM]\d{7}[A-Z]\b/;
+// No word boundaries: an identifier glued to other text ("ID:S1234567D")
+// must still be caught. False positives only block a publish, which is the
+// safe direction.
+const NRIC = /[STFGM]\d{7}[A-Z]/;
 const EMAIL = /[\w.+-]+@[\w-]+\.[\w.]+/;
+
+/** Every string value and object key in a decoded document, recursively. */
+function* strings(value) {
+  if (typeof value === "string") {
+    yield value;
+  } else if (Array.isArray(value)) {
+    for (const v of value) yield* strings(v);
+  } else if (value && typeof value === "object") {
+    for (const [k, v] of Object.entries(value)) {
+      yield k;
+      yield* strings(v);
+    }
+  }
+}
 
 /** Problems that make a document unsafe or invalid to publish. */
 export function auditDocument(doc) {
@@ -30,8 +47,21 @@ export function auditDocument(doc) {
     const [obj, key] = field.split(".");
     if (data?.[obj] && key in data[obj]) problems.push(`${field} is not obfuscated`);
   }
-  const text = JSON.stringify(data);
-  if (NRIC.test(text)) problems.push("contains an NRIC-like value");
-  if (EMAIL.test(text)) problems.push("contains an email-like value");
+  // Scan decoded strings, not JSON text: serialisation escapes newlines and
+  // tabs as "\\n"/"\\t", which would hide an identifier that follows them.
+  for (const str of strings(data)) {
+    if (NRIC.test(str)) problems.push(`contains an NRIC-like value: ${mask(str)}`);
+    if (EMAIL.test(str)) problems.push(`contains an email-like value: ${mask(str)}`);
+  }
   return problems;
+}
+
+/** Show where a hit is without printing the identifier itself into CI logs. */
+function mask(str) {
+  return JSON.stringify(
+    str
+      .replace(new RegExp(NRIC.source, "g"), "[NRIC]")
+      .replace(new RegExp(EMAIL.source, "g"), "[EMAIL]")
+      .slice(0, 60),
+  );
 }

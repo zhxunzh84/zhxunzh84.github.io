@@ -10,6 +10,8 @@
   letter-spacing: inherit;
   text-transform: inherit;
   cursor: pointer;
+  /* Same 44px hit area as the other header controls (WCAG 2.5.8). */
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   /* The label is split across spans; keep the space between RECORD and the

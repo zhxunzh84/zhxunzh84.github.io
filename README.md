@@ -52,5 +52,6 @@ verifies or still contains an NRIC or email address.
 ## Docs
 
 - [Specification and acceptance checklist](docs/SPEC.md)
+- [Accessibility & performance audit](docs/AUDIT.md)
 
 This is a personal page, not an official NTU or OpenCerts website.

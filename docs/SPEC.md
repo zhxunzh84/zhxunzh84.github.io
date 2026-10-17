@@ -45,7 +45,7 @@ interface Credential {
   period?: { start: string; end: string }; // "2026-09-01"
   skills?: string[];
   abstract?: string;
-  opencertsUrl?: string; // full OpenCerts link incl. #key fragment
+  document?: string;     // /opencerts/<id>.opencert — NRIC/email obfuscated, verified via opencerts.io/?q=
 }
 ```
 

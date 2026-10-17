@@ -5,7 +5,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Crosshair } from "@/components/Crosshair";
 import { EntranceGate } from "@/components/EntranceGate";
-import { ogImagePath } from "@/lib/format";
+import { SITE_URL, ogImagePath } from "@/lib/format";
 import { motionBootScript } from "@/lib/motion-boot";
 import "./globals.css";
 
@@ -13,7 +13,7 @@ const geistSans = GeistSans;
 const geistMono = GeistMono;
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://zhxunzh84.github.io"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Zhang Xun · Credentials",
     template: "%s · Zhang Xun",

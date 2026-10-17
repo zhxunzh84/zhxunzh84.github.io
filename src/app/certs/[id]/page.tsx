@@ -13,7 +13,7 @@ import { RecordDecode } from "@/components/RecordDecode";
 import { RetrieveLink } from "@/components/SoundLink";
 import { Toggles } from "@/components/Toggles";
 import { VerifyPanel } from "@/components/VerifyPanel";
-import { certPath, ogImagePath, pad2 } from "@/lib/format";
+import { certPath, ogImagePath, opencertsVerifyUrl, pad2 } from "@/lib/format";
 import ui from "@/components/ui.module.css";
 import s from "./page.module.css";
 
@@ -109,9 +109,9 @@ export default async function CredentialPage(props: PageProps<"/certs/[id]">) {
         </section>
 
         {/* verification + provenance */}
-        {c.opencertsUrl && (
+        {c.document && (
           <VerifyPanel
-            url={c.opencertsUrl}
+            url={opencertsVerifyUrl(c.document)}
             issuerShort={programme.issuerShort}
             issuedOn={c.issuedOn}
           />

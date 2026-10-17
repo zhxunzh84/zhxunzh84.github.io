@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Original certificates contain NRIC/email: only the filtered copies in
+# public/opencerts/ (made by `npm run publish-cert`) may be committed.
+*.opencert
+!public/opencerts/*.opencert

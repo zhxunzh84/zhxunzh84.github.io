@@ -23,7 +23,11 @@ npm run dev        # http://localhost:3000
 npm run lint
 npm run typecheck
 npm run build      # static site in ./out
+npm run preview    # serve ./out locally, as GitHub Pages would
 ```
+
+`next start` is not available: with `output: "export"` there is no Next.js
+server, only static files. Use `npm run preview` after a build instead.
 
 ## Adding a certificate
 

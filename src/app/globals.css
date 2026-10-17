@@ -1,0 +1,50 @@
+/* Design tokens — see docs/SPEC.md §5 */
+:root {
+  --bg: #0a1120;
+  --panel: #0d1628;
+  --line: #1e2a44;
+  --line-strong: #2a3756;
+  --text: #e6edf7;
+  --text-2: #c9d4e5;
+  --text-3: #9aa8bf;
+  --text-4: #7787a1;
+  --accent: #4c8dff;
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: #7aabff;
+}
+
+a:hover {
+  color: #b3ceff;
+}
+
+:focus-visible {
+  outline: 1px solid #7aabff;
+  outline-offset: 2px;
+}

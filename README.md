@@ -1,6 +1,6 @@
 # zhxunzh84.github.io
 
-Personal credentials site for **Zhang Xun** — verifiable certificates from NTU's
+Personal credentials site for **Personal** — verifiable certificates from NTU's
 *Advanced Professional Certificate in AI Engineering*, each linked to its
 [OpenCerts](https://www.opencerts.io/) verification.
 

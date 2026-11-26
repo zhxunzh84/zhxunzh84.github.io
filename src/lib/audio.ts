@@ -9,9 +9,23 @@
 
 let ctx: AudioContext | null = null;
 
+/** The shared context if one exists. Never creates or resumes one. */
+export function getAudio(): AudioContext | null {
+  return ctx;
+}
+
+/**
+ * Must be called from a click/keypress handler. Creates the context on first
+ * use and tries to get it running:
+ * - any state other than "running" is resumed, not just "suspended": Safari
+ *   also has "interrupted" (tab switch, another app taking audio), and a
+ *   context stuck there would otherwise stay silent for the whole visit;
+ * - a one-sample silent buffer is started inside the gesture, which is what
+ *   reliably unlocks WebKit (resume() alone is not always enough there).
+ */
 export function ensureAudio(): AudioContext | null {
   if (typeof window === "undefined") return null;
-  if (!ctx) {
+  if (!ctx || ctx.state === "closed") {
     const AC =
       window.AudioContext ??
       (window as unknown as { webkitAudioContext?: typeof AudioContext })
@@ -19,7 +33,17 @@ export function ensureAudio(): AudioContext | null {
     if (!AC) return null;
     ctx = new AC();
   }
-  if (ctx.state === "suspended") void ctx.resume();
+  if (ctx.state !== "running") {
+    ctx.resume().catch(() => {});
+    try {
+      const src = ctx.createBufferSource();
+      src.buffer = ctx.createBuffer(1, 1, ctx.sampleRate);
+      src.connect(ctx.destination);
+      src.start(0);
+    } catch {
+      // Unlocking is best effort; the next gesture tries again.
+    }
+  }
   return ctx;
 }
 
@@ -63,9 +87,13 @@ function tone(
 function onGesture(play: () => void) {
   if (!ctx) return;
   if (ctx.state === "running") play();
-  else void ctx.resume().then(() => {
-    if (ctx?.state === "running") play();
-  });
+  else
+    ctx
+      .resume()
+      .then(() => {
+        if (ctx?.state === "running") play();
+      })
+      .catch(() => {});
 }
 
 export const sounds = {

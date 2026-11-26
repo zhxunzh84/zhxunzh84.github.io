@@ -107,8 +107,20 @@ export const credentials: Credential[] = [
     id: "m04",
     code: "M-04",
     kind: "module",
-    title: "DevSecOps Essentials & System Monitoring Strategies",
-    status: "pending",
+    title: "DevSecOps: Automating Integration and Deployment",
+    status: "issued",
+    issuedOn: "2026-11",
+    period: { start: "2026-10-28", end: "2026-11-13" },
+    document: "/opencerts/m04.opencert",
+    skills: [
+      "DevOps",
+      "Docker",
+      "CI/CD",
+      "GitHub Actions",
+      "Containerization",
+    ],
+    abstract:
+      "The fourth module of NTU’s Advanced Professional Certificate in AI Engineering, focused on automating integration and deployment. Hands-on work centred on DevOps practices, continuous integration and delivery pipelines with GitHub Actions, and containerizing applications with Docker for scalable, trustworthy AI applications.",
   },
   {
     id: "m05",
